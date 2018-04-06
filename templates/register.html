@@ -62,31 +62,16 @@
 								</div>
 								<hr class="minor">
 				        <div class="row">
-				        	<p class="4u"><strong>Participant ID:</strong> {{ participant_details.participant_id }}</p>
-				        	<p class="4u"><strong>Barcode:</strong> {{ participant_details.barcode }}</p>
-									{% if participant_details.paid == 'Yes' %}
-									<p class="4u"><strong>Paid:</strong> <span class="paid">{{ participant_details.paid }}</span></p>
-									{% else %}
-									<p class="4u"><strong>Paid:</strong> <span class="not-paid">{{ participant_details.paid }}</span></p>
-									{% endif %}
+				        	<p class="6u"><strong>Participant ID:</strong> {{ participant_details.participant_id }}</p>
+				        	<p class="6u"><strong>Barcode:</strong> {{ participant_details.barcode }}</p>
         				</div>
-								<div class="row">
-									<p class="12u"><strong>Team checked-in:</strong> {{ participant_details.team_checked_in }}</p>
-								</div>
 								<hr class="minor">
 				        <div class="row">
 					        <p class="6u"><strong>Name:</strong> {{ participant_details.name }}</p>
 					        <p class="6u"><strong>Phone:</strong> {{ participant_details.phone }}</p>
 					    	</div>
 				        <div class="row">
-				        	<p class="6u"><strong>Team name:</strong> {{ participant_details.team_name }}</p>
-				        	<p class="6u"><strong>Gender:</strong> {{ participant_details.gender }}</p>
-				        </div>
-								<div class="row">
-									<p class="12u"><strong>College:</strong> {{ participant_details.college }}</p>
-								</div>
-								<div class="row">
-				        	<p class="12u"><strong>Email id:</strong> {{ participant_details.email }}</p>
+				        	<p class="12u"><strong>Gender:</strong> {{ participant_details.gender }}</p>
 				        </div>
 								<hr class="minor">
 				        <div class="row">

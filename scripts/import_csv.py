@@ -1,6 +1,6 @@
 import csv
 
-from reg.models import Participant, Team
+from reg.models import Participant
 from django.utils.crypto import get_random_string
 
 def get_pid():

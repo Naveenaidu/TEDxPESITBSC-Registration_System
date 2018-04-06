@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Max
 
-from .models import Participant, Team
+from .models import Participant
 from .forms import LoginForm, CheckInForm, LunchForm, BreakfastForm, RegForm, \
 	DinnerForm
 
@@ -79,10 +79,6 @@ def register(request):
 
 			pid = str(data['pid'])
 			barcode	= str(data['barcode'])
-			noc_submitted = data.get('noc_submitted',None)
-			show_noc = False
-			show_rp = False
-			show_sp = False
 
 			if not barcode:
 				try:
@@ -109,29 +105,16 @@ def register(request):
 				participant_details['pid'] = p.id
 				participant_details['name'] = p.name
 				participant_details['gender'] = p.gender
-				participant_details['team_checked_in'] = "Yes" if p.is_team_checked_in() else "No"
-				participant_details['team_name'] = p.team.name
+				participant_details['type'] = p.reg_type
 				participant_details['phone'] = p.phone
-				participant_details['email'] = p.email
-				participant_details['college'] = p.college
 				participant_details['participant_id'] = p.participant_id
 				participant_details['registered'] = "Yes" if p.registered else "No"
 				participant_details['barcode'] = "None" if not p.barcode else p.barcode
 				participant_details['checked_in'] = "Yes" if p.checked_in else "No"
-				participant_details['paid'] = "Yes" if p.paid else "No"
-				show_noc = True
-				participant_details['noc_submitted'] = "N/A"
-
-				if not p.barcode and not p.service_provider:
-					show_rp = True
-					show_sp = True
-
 				hide_barcode = False
 				initial_dict = dict()
 				if pid:
 					initial_dict['pid'] = pid
-				if p.noc_submitted:
-					initial_dict['noc_submitted'] = p.noc_submitted
 				if p.barcode:
 					hide_barcode = True
 
@@ -165,30 +148,10 @@ def register(request):
 
 					return render(request,'register.html',context)
 
-				team_id = None
 
-				if not p.is_team_checked_in():
-					print "Inside if 1"
-					_t = Team.objects.all()
-					_p = Participant.objects.filter(registered=True)
-					if len(_p) == 0:
-						team_id = 1
-						p.team.team_id = team_id
-						p.team.save()
-					else:
-						max_id = _t.aggregate(Max('team_id'))['team_id__max']
-						if max_id is None:
-							team_id = 1
-						else:
-							team_id = max_id + 1
-						p.team.team_id = team_id
-						p.team.save()
-				else:
-					team_id = p.team.team_id
 
 				p.barcode = barcode
 				p.registered = True
-				p.paid = True
 				p.checked_in = True
 				p.save()
 
@@ -366,11 +329,9 @@ def check_in(request):
 def stats(request):
 	context = {}
 
-	context['teams'] = Team.objects.count()
 	context['participants'] = Participant.objects.count()
 	context['registered'] = Participant.objects.filter(registered=True).count()
 	context['checked_in'] = Participant.objects.filter(checked_in=True).count()
-	context['paid'] = Participant.objects.filter(paid=True).count()
 	context['had_lunch'] = Participant.objects.filter(had_lunch=True).count()
 	context['had_dinner'] = Participant.objects.filter(had_dinner=True).count()
 	context['had_breakfast'] = Participant.objects.filter(had_breakfast=True).count()
