@@ -3,4 +3,3 @@ db.sqlite3
 nohup.out
 venv/
 vv/
-attendees.csv
