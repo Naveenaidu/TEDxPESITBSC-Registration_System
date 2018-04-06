@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block extrahead %}
+<title>Home | TEDxPESITBSC 2018</title>
+{% endblock %}
+
+{% block content %}
+<!-- Banner -->
+  <section id="banner">
+    <br>
+    <br>
+    <br>
+    <img src="{% static 'images/logo_light.png' %}" width="50%"  alt="inGenius 2015" />
+<br>
+<br>
+<br>
+<br>
+    <p style="font-family:monospace;font-size:30px;">Inside Out</p>
+    <ul class="actions">
+      {% if not request.user.is_authenticated %}
+      <li><a href="/login" class="button alt">Login</a></li>
+      {% endif %}
+    </ul>
+  </section>
+
+<!-- Main -->
+
+{% endblock %}
