@@ -109,7 +109,7 @@ def register(request):
 				participant_details['participant_id'] = p.participant_id
 				participant_details['registered'] = "Yes" if p.registered else "No"
 				participant_details['barcode'] = "None" if not p.barcode else p.barcode
-				participant_details['checked_in'] = "No"
+				participant_details['checked_in'] = "Yes" if p.checked_in else "No"
 				hide_barcode = False
 				initial_dict = dict()
 				if pid:
@@ -117,7 +117,7 @@ def register(request):
 				if p.barcode:
 					hide_barcode = True
 
-				form = RegForm(initial=initial_dict,show_noc=show_noc,
+				form = RegForm(initial=initial_dict,
 				 hide_barcode=hide_barcode)
 
 				context['participant_details'] = participant_details
@@ -151,13 +151,13 @@ def register(request):
 
 				p.barcode = barcode
 				p.registered = True
-				p.checked_in = True
+				p.checked_in = False
 				p.save()
 
 				form = RegForm(hide_barcode=True)
 
 				context['form']				= form
-				context['message']			= "Registered successfully. Your team id is: {}".format(team_id)
+				context['message']			= "Registered successfully"
 				context['messageclass']		= "success"
 				context['form_type']		= 1
 
