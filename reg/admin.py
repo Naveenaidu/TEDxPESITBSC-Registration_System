@@ -4,13 +4,12 @@ from .models import Participant
 
 class ParticipantAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('Personal Information',    {'fields': ['participant_id', 'name',
-            'gender', 'phone']}),
+        ('Personal Information',    {'fields': ['participant_id', 'name', 'phone']}),
         ('Event Information',       {'fields': ['barcode', 'registered',
              'checked_in', 'had_lunch', 'had_dinner', 'had_breakfast',
             ]})
     ]
-    list_display = ('participant_id', 'name', 'phone', 'gender')
+    list_display = ('participant_id', 'name', 'phone')
     search_fields = ('participant_id', 'name', 'barcode')
 
 admin.site.register(Participant, ParticipantAdmin)

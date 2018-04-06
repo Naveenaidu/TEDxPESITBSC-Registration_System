@@ -104,7 +104,6 @@ def register(request):
 				participant_details = {}
 				participant_details['pid'] = p.id
 				participant_details['name'] = p.name
-				participant_details['gender'] = p.gender
 				participant_details['type'] = p.reg_type
 				participant_details['phone'] = p.phone
 				participant_details['participant_id'] = p.participant_id

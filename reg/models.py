@@ -1,13 +1,8 @@
 from django.db import models
 
 class Participant(models.Model):
-    GENDER_CHOICES = (
-        ('M', 'Male'),
-        ('F', 'Female'),
-    )
     participant_id = models.CharField(max_length=10, unique=True)
     name = models.CharField(max_length=50)
-    gender = models.CharField(max_length=1)
     phone = models.CharField(max_length=15)
     reg_type = models.CharField(max_length=15)
     barcode = models.CharField(max_length=50, blank=True)
