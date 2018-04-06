@@ -110,7 +110,7 @@ def register(request):
 				participant_details['participant_id'] = p.participant_id
 				participant_details['registered'] = "Yes" if p.registered else "No"
 				participant_details['barcode'] = "None" if not p.barcode else p.barcode
-				participant_details['checked_in'] = "Yes" if p.checked_in else "No"
+				participant_details['checked_in'] = "No"
 				hide_barcode = False
 				initial_dict = dict()
 				if pid:
