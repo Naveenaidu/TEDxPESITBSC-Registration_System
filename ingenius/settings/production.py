@@ -2,7 +2,7 @@ import os
 
 from ingenius.settings.base import *
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','13.126.226.206','regs.tedxpesitbsc.com']
 
@@ -16,4 +16,4 @@ DATABASES = {
     }
 }
 
-STATIC_ROOT = os.environ.get('STATIC_ROOT', None)
+STATIC_ROOT = os.environ.get('STATIC_ROOT', 'None')
